@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name=AzureADIntegration:
+  security:
+    oauth2:
+      client:
+        registration:
+          azure:
+            client-id: 927b5559-d13f-4a17-b63f-20695d2f3490
+            client-secret: aa0db234-445c-4251-82d3-5e9d19c5970e
+            scope:
+              - openid
+              - profile
+              - email
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/azure"
+        provider:
+          azure:
+            issuer-uri: https://login.microsoftonline.com/3c10c941-37e4-4b03-8d97-d3524abe6040/v2.0
+  cloud:
+    azure:
+      active-directory:
+        profile:
+          tenant-id: 3c10c941-37e4-4b03-8d97-d3524abe6040
+        user-group:
+          allowed-group-names:
+            - Your_Group_Name
+
+
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /v3/api-docs

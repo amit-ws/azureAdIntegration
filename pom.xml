@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -8,11 +8,11 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.whiteSwanSecurity</groupId>
-	<artifactId>AzureADIntegration</artifactId>
+	<groupId>com.ws</groupId>
+	<artifactId>AzureAdWsIntegration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AzureADIntegration</name>
-	<description>Demo project for Azure AD integration</description>
+	<name>AzureAdWsIntegration</name>
+	<description>Demo project for azure ad integration</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -28,19 +28,20 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<spring-cloud-azure.version>5.16.0</spring-cloud-azure.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>3.1.0</version> <!-- or use the latest version -->
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.azure.spring</groupId>
+			<artifactId>spring-cloud-azure-starter-active-directory</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -53,57 +54,102 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- New dependencies from the first pom.xml -->
+		<!--		<dependency>-->
+		<!--			<groupId>com.azure.resourcemanager</groupId>-->
+		<!--			<artifactId>azure-resourcemanager</artifactId>-->
+		<!--			<version>2.17.0</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.azure</groupId>-->
+		<!--			<artifactId>azure-identity</artifactId>-->
+		<!--			<version>1.5.3</version>-->
+		<!--		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/com.azure/azure-identity -->
+		<!--		<dependency>-->
+		<!--			<groupId>com.azure</groupId>-->
+		<!--			<artifactId>azure-identity</artifactId>-->
+		<!--			<version>1.14.0</version>-->
+		<!--			<scope>compile</scope>-->
+		<!--		</dependency>-->
+
+
+
+		<!--		<dependency>-->
+		<!--			<groupId>com.azure</groupId>-->
+		<!--			<artifactId>azure-identity</artifactId>-->
+		<!--			<version>1.14.0</version> &lt;!&ndash; You can also try 1.5.3 or later &ndash;&gt;-->
+		<!--		</dependency>-->
+
+
+		<!-- https://mvnrepository.com/artifact/com.microsoft.graph/microsoft-graph -->
 		<dependency>
-			<groupId>com.azure.spring</groupId>
-			<artifactId>azure-spring-boot-starter-active-directory</artifactId>
-			<version>4.0.0</version>
+			<groupId>com.microsoft.graph</groupId>
+			<artifactId>microsoft-graph</artifactId>
+			<version>5.80.0</version>
 		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/com.azure/azure-identity -->
 		<dependency>
 			<groupId>com.azure</groupId>
 			<artifactId>azure-identity</artifactId>
-			<version>1.13.3</version>
+			<version>1.14.0</version>
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-			<version>3.3.4</version>
-		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-oauth2-client -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
-			<version>3.3.2</version>
-		</dependency>
 
+
+
+
+		<!-- https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp -->
+		<!--		<dependency>-->
+		<!--			<groupId>com.squareup.okhttp</groupId>-->
+		<!--			<artifactId>okhttp</artifactId>-->
+		<!--			<version>2.7.5</version>-->
+		<!--		</dependency>-->
+
+
+
+
+
+
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+		</dependency>
+		<!-- Uncomment if needed
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-oauth2-client</artifactId>
-			<version>6.1.1</version> <!-- Make sure this version matches your Spring Security version -->
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
 		</dependency>
+		-->
+		<!-- https://mvnrepository.com/artifact/com.microsoft.graph/microsoft-graph -->
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.14</version> <!-- Check for the latest version -->
-		</dependency>
 
 
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.azure.spring</groupId>
+				<artifactId>spring-cloud-azure-dependencies</artifactId>
+				<version>${spring-cloud-azure.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>2.18.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -121,5 +167,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
